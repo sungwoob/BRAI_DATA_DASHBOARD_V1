@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "AI-phenotype-v1",
+  "version": "1.0.0",
+  "dataset": {
+    "name": "AI",
+    "type": "phenotype",
+    "crop": "tomato",
+    "cropCode": "TOM"
+  },
+  "numberOfData": 144,
+  "dataType": {
+    "type": "phenotype",
+    "numberOfPhenotype": 10
+  },
+  "storage": {
+    "locationOfFile": "./dataset/AI/phenotype/blub10/",
+    "fileType": "csv"
+  },
+  "relatedGenotype": {
+    "name": "AI",
+    "type": "genotype"
+  },
+  "generatedAt": "2025-12-27T19:11:29+09:00"
+}
