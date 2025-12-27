@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "TC1-genotype-v1",
+  "version": "1.0.0",
+  "dataset": {
+    "name": "TC1",
+    "type": "genotype",
+    "crop": "tomato",
+    "cropCode": "TOM"
+  },
+  "numberOfData": 192,
+  "dataType": {
+    "type": "SNP",
+    "numberOfSNP": 51265
+  },
+  "storage": {
+    "locationOfFile": "./dataset/TC1/genotype/",
+    "fileType": "csv"
+  },
+  "generatedAt": "2025-12-27T19:11:29+09:00"
+}
