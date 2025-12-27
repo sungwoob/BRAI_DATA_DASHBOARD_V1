@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "TC1-phenotype-v1",
+  "version": "1.0.0",
+  "dataset": {
+    "name": "TC1",
+    "type": "phenotype",
+    "crop": "tomato",
+    "cropCode": "TOM"
+  },
+  "numberOfData": 192,
+  "dataType": {
+    "type": "phenotype",
+    "numberOfPhenotype": 8
+  },
+  "storage": {
+    "locationOfFile": "./dataset/TC1/phenotype/blub/",
+    "fileType": "csv"
+  },
+  "relatedGenotype": {
+    "name": "TC1",
+    "type": "genotype"
+  },
+  "generatedAt": "2025-12-27T19:11:29+09:00"
+}
