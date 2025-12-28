@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dataset Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div>
+        <h1>Dataset Dashboard</h1>
+        <p>Genotype / Phenotype description files의 요약을 한눈에 확인하세요.</p>
+      </div>
+      <div class="badge" id="total-count">0 datasets</div>
+    </header>
+
+    <section class="controls">
+      <input id="search" type="search" placeholder="이름 또는 작물로 검색" />
+      <div class="filter-group">
+        <label><input type="checkbox" value="genotype" checked /> Genotype</label>
+        <label><input type="checkbox" value="phenotype" checked /> Phenotype</label>
+      </div>
+      <div class="filter-group crops">
+        <label><input type="checkbox" value="tomato" checked /> 🍅 토마토</label>
+        <label><input type="checkbox" value="cabbage" checked /> 🥬 양배추</label>
+      </div>
+    </section>
+
+    <section id="summary" class="summary"></section>
+
+    <main id="dataset-list" class="dataset-list" aria-live="polite"></main>
+
+    <template id="dataset-card-template">
+      <article class="dataset-card">
+        <div class="card-header">
+          <h2 class="dataset-name"></h2>
+          <span class="type-chip"></span>
+        </div>
+        <p class="meta"></p>
+        <dl class="details">
+          <div>
+            <dt>데이터 수</dt>
+            <dd class="count">-</dd>
+          </div>
+          <div>
+            <dt>데이터 타입</dt>
+            <dd class="datatype">-</dd>
+          </div>
+          <div>
+            <dt>저장 위치</dt>
+            <dd class="storage"></dd>
+          </div>
+          <div>
+            <dt>생성 시각</dt>
+            <dd class="generated">-</dd>
+          </div>
+          <div class="related" hidden>
+            <dt>관련 Genotype</dt>
+            <dd class="related-genotype"></dd>
+          </div>
+          <div>
+            <dt>설명 파일</dt>
+            <dd class="filepath"></dd>
+          </div>
+        </dl>
+      </article>
+    </template>
+
+    <script src="/main.js"></script>
+  </body>
+</html>
