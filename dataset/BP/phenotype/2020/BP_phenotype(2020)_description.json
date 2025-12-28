@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "BP-phenotype-v1",
+  "version": "1.0.0",
+  "dataset": {
+    "name": "BP",
+    "type": "phenotype",
+    "crop": "tomato",
+    "cropCode": "TOM"
+  },
+  "numberOfData": 162,
+  "dataType": {
+    "type": "phenotype",
+    "numberOfPhenotype": 7
+  },
+  "storage": {
+    "locationOfFile": "./dataset/BP/phenotype/2020/",
+    "fileType": "csv"
+  },
+  "relatedGenotype": {
+    "name": "BP",
+    "type": "genotype"
+  },
+  "generatedAt": "2025-12-27T19:11:29+09:00"
+}
