@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs/promises');
 const { createReadStream, existsSync } = require('fs');
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 59023;
 const ROOT = __dirname;
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DATASET_ROOT = path.join(ROOT, 'dataset');
