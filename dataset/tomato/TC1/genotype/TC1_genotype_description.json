@@ -14,8 +14,9 @@
     "numberOfSNP": 51265
   },
   "storage": {
-    "locationOfFile": "./dataset/TC1/genotype/",
+    "locationOfFile": "./dataset/tomato/TC1/genotype/",
     "fileType": "csv"
   },
   "generatedAt": "2025-12-27T19:11:29+09:00"
 }
+
