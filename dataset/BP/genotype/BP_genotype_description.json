@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "BP-genotype-v1",
+  "version": "1.0.0",
+  "dataset": {
+    "name": "BP",
+    "type": "genotype",
+    "crop": "tomato",
+    "cropCode": "TOM"
+  },
+  "numberOfData": 162,
+  "dataType": {
+    "type": "SNP",
+    "numberOfSNP": 51265
+  },
+  "storage": {
+    "locationOfFile": "./dataset/BP/genotype/",
+    "fileType": "csv"
+  },
+  "generatedAt": "2025-12-27T19:11:29+09:00"
+}
