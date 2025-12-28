@@ -14,7 +14,7 @@
     "numberOfPhenotype": 8
   },
   "storage": {
-    "locationOfFile": "./dataset/TC1/phenotype/blub/",
+    "locationOfFile": "./dataset/tomato/TC1/phenotype/blub/",
     "fileType": "csv"
   },
   "relatedGenotype": {
@@ -23,3 +23,4 @@
   },
   "generatedAt": "2025-12-27T19:11:29+09:00"
 }
+
