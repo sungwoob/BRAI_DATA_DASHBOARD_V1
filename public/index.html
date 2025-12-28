@@ -16,21 +16,36 @@
         <div class="badge" id="total-count">0 datasets</div>
       </header>
 
-      <section class="controls">
-        <input id="search" type="search" placeholder="이름 또는 작물로 검색" />
-        <div class="filter-group">
-          <label><input type="checkbox" value="genotype" checked /> Genotype</label>
-          <label><input type="checkbox" value="phenotype" checked /> Phenotype</label>
-        </div>
-        <div class="filter-group crops">
-          <label><input type="checkbox" value="tomato" checked /> 🍅 토마토</label>
-          <label><input type="checkbox" value="cabbage" checked /> 🥬 양배추</label>
-        </div>
-      </section>
+      <div class="content-grid">
+        <aside class="sidebar" aria-label="데이터 구성 트리">
+          <div class="sidebar-header">
+            <span class="sidebar-icon" aria-hidden="true">🌳</span>
+            <div>
+              <p class="sidebar-eyebrow">구조 미리보기</p>
+              <h2 class="sidebar-title">Dataset Tree</h2>
+            </div>
+          </div>
+          <div id="tree-view" class="tree-view" role="tree"></div>
+        </aside>
 
-      <section id="summary" class="summary"></section>
+        <section class="main-panel">
+          <section class="controls">
+            <input id="search" type="search" placeholder="이름 또는 작물로 검색" />
+            <div class="filter-group">
+              <label><input type="checkbox" value="genotype" checked /> Genotype</label>
+              <label><input type="checkbox" value="phenotype" checked /> Phenotype</label>
+            </div>
+            <div class="filter-group crops">
+              <label><input type="checkbox" value="tomato" checked /> 🍅 토마토</label>
+              <label><input type="checkbox" value="cabbage" checked /> 🥬 양배추</label>
+            </div>
+          </section>
 
-      <main id="dataset-list" class="dataset-list" aria-live="polite"></main>
+          <section id="summary" class="summary"></section>
+
+          <main id="dataset-list" class="dataset-list" aria-live="polite"></main>
+        </section>
+      </div>
     </div>
 
     <template id="dataset-card-template">

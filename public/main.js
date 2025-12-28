@@ -3,6 +3,7 @@ const datasetCardTemplate = document.getElementById('dataset-card-template');
 const totalCount = document.getElementById('total-count');
 const summaryContainer = document.getElementById('summary');
 const searchInput = document.getElementById('search');
+const treeContainer = document.getElementById('tree-view');
 const filterBoxes = Array.from(document.querySelectorAll('.filter-group:not(.crops) input[type="checkbox"]'));
 const cropBoxes = Array.from(document.querySelectorAll('.filter-group.crops input[type="checkbox"]'));
 
@@ -117,13 +118,53 @@ function filterDatasets(allDatasets) {
   });
 }
 
+function renderTreeNode(node) {
+  const item = document.createElement('div');
+  item.className = 'tree-item ' + node.type;
+  item.setAttribute('role', 'treeitem');
+  item.setAttribute('aria-label', node.name);
+
+  const label = document.createElement('div');
+  label.className = 'tree-label';
+  label.innerHTML = (node.type === 'directory' ? '📁' : '📄') + ' <span>' + node.name + '</span>';
+  item.appendChild(label);
+
+  if (node.children && node.children.length) {
+    const childrenContainer = document.createElement('div');
+    childrenContainer.className = 'tree-children';
+    childrenContainer.setAttribute('role', 'group');
+
+    node.children.forEach((child) => {
+      childrenContainer.appendChild(renderTreeNode(child));
+    });
+
+    item.appendChild(childrenContainer);
+  }
+
+  return item;
+}
+
+function renderTree(treeData) {
+  treeContainer.innerHTML = '';
+  if (!treeData || !treeData.length) {
+    treeContainer.innerHTML = '<p class="muted">구성을 불러오지 못했습니다.</p>';
+    return;
+  }
+
+  treeData.forEach((node) => {
+    treeContainer.appendChild(renderTreeNode(node));
+  });
+}
+
 async function bootstrap() {
   const response = await fetch('/api/datasets');
   const payload = await response.json();
   const datasets = payload.datasets || [];
+  const tree = payload.tree || [];
 
   createSummaryPills(datasets);
   renderDatasets(datasets);
+  renderTree(tree);
 
   const updateView = () => {
     const filtered = filterDatasets(datasets);

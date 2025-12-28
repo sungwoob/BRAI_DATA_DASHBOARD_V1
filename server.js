@@ -92,10 +92,42 @@ async function loadDatasetDescriptions() {
   return descriptions.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+async function buildTree(dir, base) {
+  const entries = await readDir(dir);
+  const children = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry);
+    const stats = await stat(fullPath);
+    const relativePath = path.relative(base, fullPath);
+
+    if (stats.isDirectory()) {
+      children.push({
+        name: entry,
+        path: relativePath,
+        type: 'directory',
+        children: await buildTree(fullPath, base)
+      });
+    } else {
+      children.push({
+        name: entry,
+        path: relativePath,
+        type: 'file'
+      });
+    }
+  }
+
+  return children.sort((a, b) => {
+    if (a.type === b.type) return a.name.localeCompare(b.name);
+    return a.type === 'directory' ? -1 : 1;
+  });
+}
+
 async function serveApi(req, res) {
   try {
     const datasets = await loadDatasetDescriptions();
-    const payload = JSON.stringify({ datasets });
+    const tree = await buildTree(DATASET_ROOT, DATASET_ROOT);
+    const payload = JSON.stringify({ datasets, tree });
     res.writeHead(200, { 'Content-Type': MIME_TYPES['.json'] });
     res.end(payload);
   } catch (err) {
