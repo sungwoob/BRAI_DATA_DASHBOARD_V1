@@ -65,7 +65,9 @@ function renderDatasets(datasets) {
     typeChip.classList.add(typeClass);
 
     meta.textContent = `${dataset.crop} (${dataset.cropCode || 'code 없음'}) • 버전 ${dataset.version}`;
-    count.textContent = dataset.numberOfData?.toLocaleString() ?? '-';
+    count.textContent = typeof dataset.numberOfData === 'number'
+      ? dataset.numberOfData.toLocaleString()
+      : '-';
     datatype.textContent = dataset.dataType || '-';
     storage.textContent = dataset.storagePath;
     generated.textContent = formatDate(dataset.generatedAt);

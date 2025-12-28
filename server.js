@@ -34,8 +34,17 @@ async function walkForDescriptions(dir) {
 
 function buildDatasetSummary(data, filePath) {
   const dataset = data.dataset || {};
-  const type = dataset.type || data.dataType?.type || 'unknown';
-  const numberOfData = data.numberOfData ?? data.dataType?.numberOfPhenotype ?? data.dataType?.numberOfSNP;
+  const type = dataset.type
+    || (data.dataType && data.dataType.type)
+    || 'unknown';
+
+  const numberOfData = typeof data.numberOfData === 'number'
+    ? data.numberOfData
+    : (data.dataType && typeof data.dataType.numberOfPhenotype === 'number'
+        ? data.dataType.numberOfPhenotype
+        : (data.dataType && typeof data.dataType.numberOfSNP === 'number'
+            ? data.dataType.numberOfSNP
+            : undefined));
 
   return {
     id: data.id || path.basename(filePath),
@@ -45,8 +54,10 @@ function buildDatasetSummary(data, filePath) {
     type,
     version: data.version || 'N/A',
     numberOfData: typeof numberOfData === 'number' ? numberOfData : null,
-    dataType: data.dataType?.type || null,
-    storagePath: data.storage?.locationOfFile || path.dirname(path.relative(DATASET_ROOT, filePath)),
+    dataType: data.dataType && data.dataType.type ? data.dataType.type : null,
+    storagePath: data.storage && data.storage.locationOfFile
+      ? data.storage.locationOfFile
+      : path.dirname(path.relative(DATASET_ROOT, filePath)),
     generatedAt: data.generatedAt || null,
     relatedGenotype: data.relatedGenotype || null,
     filePath: path.relative(DATASET_ROOT, filePath)
