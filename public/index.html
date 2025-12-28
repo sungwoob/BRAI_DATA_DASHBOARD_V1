@@ -7,29 +7,31 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <header class="page-header">
-      <div>
-        <h1>Dataset Dashboard</h1>
-        <p>Genotype / Phenotype description files의 요약을 한눈에 확인하세요.</p>
-      </div>
-      <div class="badge" id="total-count">0 datasets</div>
-    </header>
+    <div class="layout">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title"><span class="title-icon" aria-hidden="true">📂</span>Dataset Dashboard</h1>
+          <p>Genotype / Phenotype description files의 요약을 한눈에 확인하세요.</p>
+        </div>
+        <div class="badge" id="total-count">0 datasets</div>
+      </header>
 
-    <section class="controls">
-      <input id="search" type="search" placeholder="이름 또는 작물로 검색" />
-      <div class="filter-group">
-        <label><input type="checkbox" value="genotype" checked /> Genotype</label>
-        <label><input type="checkbox" value="phenotype" checked /> Phenotype</label>
-      </div>
-      <div class="filter-group crops">
-        <label><input type="checkbox" value="tomato" checked /> 🍅 토마토</label>
-        <label><input type="checkbox" value="cabbage" checked /> 🥬 양배추</label>
-      </div>
-    </section>
+      <section class="controls">
+        <input id="search" type="search" placeholder="이름 또는 작물로 검색" />
+        <div class="filter-group">
+          <label><input type="checkbox" value="genotype" checked /> Genotype</label>
+          <label><input type="checkbox" value="phenotype" checked /> Phenotype</label>
+        </div>
+        <div class="filter-group crops">
+          <label><input type="checkbox" value="tomato" checked /> 🍅 토마토</label>
+          <label><input type="checkbox" value="cabbage" checked /> 🥬 양배추</label>
+        </div>
+      </section>
 
-    <section id="summary" class="summary"></section>
+      <section id="summary" class="summary"></section>
 
-    <main id="dataset-list" class="dataset-list" aria-live="polite"></main>
+      <main id="dataset-list" class="dataset-list" aria-live="polite"></main>
+    </div>
 
     <template id="dataset-card-template">
       <article class="dataset-card">
