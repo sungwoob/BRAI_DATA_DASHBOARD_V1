@@ -14,7 +14,7 @@
     "numberOfPhenotype": 7
   },
   "storage": {
-    "locationOfFile": "./dataset/BP/phenotype/2018/",
+    "locationOfFile": "./dataset/tomato/BP/phenotype/2018/",
     "fileType": "csv"
   },
   "relatedGenotype": {
@@ -23,3 +23,4 @@
   },
   "generatedAt": "2025-12-27T19:11:29+09:00"
 }
+
