@@ -1,7 +1,12 @@
 const http = require('http');
 const path = require('path');
-const fs = require('fs/promises');
-const { createReadStream, existsSync } = require('fs');
+const fs = require('fs');
+const { promisify } = require('util');
+const { createReadStream, existsSync } = fs;
+
+const readDir = promisify(fs.readdir);
+const readFile = promisify(fs.readFile);
+const stat = promisify(fs.stat);
 
 const PORT = Number(process.env.PORT) || 59023;
 const ROOT = __dirname;
@@ -16,20 +21,25 @@ const MIME_TYPES = {
 };
 
 async function walkForDescriptions(dir) {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
-  const files = await Promise.all(
-    entries.map(async (entry) => {
-      const fullPath = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        return walkForDescriptions(fullPath);
-      }
-      if (entry.isFile() && entry.name.endsWith('_description.json')) {
-        return [fullPath];
-      }
-      return [];
-    })
-  );
-  return files.flat();
+  const entries = await readDir(dir);
+  const collected = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry);
+    const details = await stat(fullPath);
+
+    if (details.isDirectory()) {
+      const nested = await walkForDescriptions(fullPath);
+      collected.push.apply(collected, nested);
+      continue;
+    }
+
+    if (details.isFile() && entry.endsWith('_description.json')) {
+      collected.push(fullPath);
+    }
+  }
+
+  return collected;
 }
 
 function buildDatasetSummary(data, filePath) {
@@ -70,7 +80,7 @@ async function loadDatasetDescriptions() {
 
   for (const filePath of descriptionFiles) {
     try {
-      const raw = await fs.readFile(filePath, 'utf-8');
+      const raw = await readFile(filePath, 'utf-8');
       const data = JSON.parse(raw);
       descriptions.push(buildDatasetSummary(data, filePath));
     } catch (err) {
