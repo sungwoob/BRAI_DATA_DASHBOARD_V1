@@ -14,7 +14,7 @@
     "numberOfPhenotype": 10
   },
   "storage": {
-    "locationOfFile": "./dataset/AI/phenotype/blub10/",
+    "locationOfFile": "./dataset/tomato/AI/phenotype/blub10/",
     "fileType": "csv"
   },
   "relatedGenotype": {
@@ -23,3 +23,4 @@
   },
   "generatedAt": "2025-12-27T19:11:29+09:00"
 }
+
