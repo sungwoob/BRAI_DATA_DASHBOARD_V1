@@ -83,6 +83,10 @@ body {
   color: var(--muted);
 }
 
+.filter-group.crops {
+  flex-wrap: wrap;
+}
+
 .summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -132,6 +136,12 @@ body {
 .dataset-name {
   margin: 0;
   font-size: 20px;
+}
+
+.crop-icon {
+  margin-right: 8px;
+  font-size: 22px;
+  vertical-align: middle;
 }
 
 .type-chip {

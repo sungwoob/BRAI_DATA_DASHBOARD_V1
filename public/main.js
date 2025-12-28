@@ -3,7 +3,15 @@ const datasetCardTemplate = document.getElementById('dataset-card-template');
 const totalCount = document.getElementById('total-count');
 const summaryContainer = document.getElementById('summary');
 const searchInput = document.getElementById('search');
-const filterBoxes = Array.from(document.querySelectorAll('.filter-group input[type="checkbox"]'));
+const filterBoxes = Array.from(document.querySelectorAll('.filter-group:not(.crops) input[type="checkbox"]'));
+const cropBoxes = Array.from(document.querySelectorAll('.filter-group.crops input[type="checkbox"]'));
+
+function cropIcon(crop) {
+  const name = (crop || '').toLowerCase();
+  if (name.indexOf('tomato') !== -1 || name.indexOf('토마토') !== -1) return '🍅';
+  if (name.indexOf('cabbage') !== -1 || name.indexOf('양배추') !== -1) return '🥬';
+  return '🗂️';
+}
 
 function formatDate(value) {
   if (!value) return '-';
@@ -59,7 +67,8 @@ function renderDatasets(datasets) {
     const relatedContainer = clone.querySelector('.related');
     const relatedGenotype = clone.querySelector('.related-genotype');
 
-    nameEl.textContent = dataset.name;
+    const icon = cropIcon(dataset.crop);
+    nameEl.innerHTML = `<span class="crop-icon" aria-hidden="true">${icon}</span>${dataset.name}`;
     typeChip.textContent = dataset.type;
     const typeClass = dataset.type.toLowerCase();
     typeChip.classList.add(typeClass);
@@ -92,15 +101,19 @@ function filterDatasets(allDatasets) {
   const activeTypes = filterBoxes
     .filter((box) => box.checked)
     .map((box) => box.value.toLowerCase());
+  const activeCrops = cropBoxes
+    .filter((box) => box.checked)
+    .map((box) => box.value.toLowerCase());
   const keyword = searchInput.value.trim().toLowerCase();
 
   return allDatasets.filter((dataset) => {
     const matchesType = activeTypes.includes(dataset.type.toLowerCase());
+    const matchesCrop = activeCrops.includes(dataset.crop.toLowerCase());
     const matchesKeyword =
       !keyword ||
       dataset.name.toLowerCase().includes(keyword) ||
       dataset.crop.toLowerCase().includes(keyword);
-    return matchesType && matchesKeyword;
+    return matchesType && matchesCrop && matchesKeyword;
   });
 }
 
@@ -119,6 +132,7 @@ async function bootstrap() {
 
   searchInput.addEventListener('input', updateView);
   filterBoxes.forEach((box) => box.addEventListener('change', updateView));
+  cropBoxes.forEach((box) => box.addEventListener('change', updateView));
 }
 
 bootstrap().catch((err) => {
