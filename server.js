@@ -63,6 +63,12 @@ function buildDatasetSummary(data, filePath) {
     cropCode: dataset.cropCode || '',
     type,
     version: data.version || 'N/A',
+    subtitle: (() => {
+      const relative = path.relative(DATASET_ROOT, filePath);
+      const segments = relative.split(path.sep);
+      const detail = segments.slice(3, segments.length - 1).filter(Boolean).join(' / ');
+      return detail || data.version || '';
+    })(),
     numberOfData: typeof numberOfData === 'number' ? numberOfData : null,
     dataType: data.dataType && data.dataType.type ? data.dataType.type : null,
     storagePath: data.storage && data.storage.locationOfFile

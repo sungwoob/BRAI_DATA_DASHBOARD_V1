@@ -11,7 +11,7 @@
       <header class="page-header">
         <div>
           <h1 class="page-title"><span class="title-icon" aria-hidden="true">📂</span>Dataset Dashboard</h1>
-          <p class="page-subtitle">Genotype / Phenotype 데이터세트의 요약을 한눈에 확인하세요.</p>
+          <p class="page-subtitle">Genotype / Phenotype description files의 요약을 한눈에 확인하세요.</p>
         </div>
         <div class="badge" id="total-count">0 datasets</div>
       </header>
@@ -51,7 +51,10 @@
     <template id="dataset-card-template">
       <article class="dataset-card">
         <div class="card-header">
-          <h2 class="dataset-name"></h2>
+          <h2 class="dataset-name">
+            <span class="dataset-title"></span>
+            <small class="dataset-subtitle" aria-hidden="true"></small>
+          </h2>
           <span class="type-chip"></span>
           <button class="toggle-btn" type="button" aria-expanded="false" aria-label="세부 정보 보기">펼치기</button>
         </div>

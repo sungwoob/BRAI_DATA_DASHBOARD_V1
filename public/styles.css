@@ -63,7 +63,7 @@ body {
   left: 0;
   bottom: -8px;
   width: 100%;
-  height: 3px;
+  height: 6px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(37, 99, 235, 0.18), rgba(124, 58, 237, 0.18));
 }
@@ -87,7 +87,7 @@ body {
 }
 
 .page-subtitle {
-  margin-top: 20px;
+  margin-top: 12px;
 }
 
 .muted {
@@ -297,12 +297,33 @@ body {
   margin: 0;
   font-size: 20px;
   flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .crop-icon {
   margin-right: 8px;
   font-size: 22px;
   vertical-align: middle;
+}
+
+.dataset-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dataset-subtitle {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 12px;
+  border: 1px solid var(--border);
 }
 
 .type-chip {

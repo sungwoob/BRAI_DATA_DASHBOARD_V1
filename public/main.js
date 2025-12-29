@@ -58,7 +58,8 @@ function renderDatasets(datasets) {
     const clone = datasetCardTemplate.content.cloneNode(true);
     const card = clone.querySelector('.dataset-card');
 
-    const nameEl = clone.querySelector('.dataset-name');
+    const nameEl = clone.querySelector('.dataset-title');
+    const subtitleEl = clone.querySelector('.dataset-subtitle');
     const typeChip = clone.querySelector('.type-chip');
     const meta = clone.querySelector('.meta');
     const count = clone.querySelector('.count');
@@ -72,6 +73,8 @@ function renderDatasets(datasets) {
 
     const icon = cropIcon(dataset.crop);
     nameEl.innerHTML = `<span class="crop-icon" aria-hidden="true">${icon}</span>${dataset.name}`;
+    subtitleEl.textContent = dataset.subtitle || '';
+    subtitleEl.hidden = !dataset.subtitle;
     typeChip.textContent = dataset.type;
     const typeClass = dataset.type.toLowerCase();
     typeChip.classList.add(typeClass);
