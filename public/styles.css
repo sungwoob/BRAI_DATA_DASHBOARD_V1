@@ -296,6 +296,7 @@ body {
 .dataset-name {
   margin: 0;
   font-size: 20px;
+  flex: 1;
 }
 
 .crop-icon {
@@ -321,6 +322,35 @@ body {
 .type-chip.phenotype {
   background: rgba(217, 119, 6, 0.12);
   color: #92400e;
+}
+
+.toggle-btn {
+  border: 1px solid var(--border);
+  background: #eef2ff;
+  color: #312e81;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(49, 46, 129, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.toggle-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(49, 46, 129, 0.16);
+  border-color: rgba(49, 46, 129, 0.35);
+}
+
+.dataset-card.collapsed {
+  padding: 12px 14px;
+  gap: 4px;
+}
+
+.dataset-card.collapsed .meta,
+.dataset-card.collapsed .details {
+  display: none;
 }
 
 .meta {

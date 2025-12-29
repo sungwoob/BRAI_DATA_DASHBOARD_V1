@@ -6,6 +6,7 @@ const searchInput = document.getElementById('search');
 const treeContainer = document.getElementById('tree-view');
 const filterBoxes = Array.from(document.querySelectorAll('.filter-group:not(.crops) input[type="checkbox"]'));
 const cropBoxes = Array.from(document.querySelectorAll('.filter-group.crops input[type="checkbox"]'));
+const expandedKeys = new Set();
 
 function cropIcon(crop) {
   const name = (crop || '').toLowerCase();
@@ -67,6 +68,7 @@ function renderDatasets(datasets) {
     const filePath = clone.querySelector('.filepath');
     const relatedContainer = clone.querySelector('.related');
     const relatedGenotype = clone.querySelector('.related-genotype');
+    const toggleBtn = clone.querySelector('.toggle-btn');
 
     const icon = cropIcon(dataset.crop);
     nameEl.innerHTML = `<span class="crop-icon" aria-hidden="true">${icon}</span>${dataset.name}`;
@@ -91,6 +93,37 @@ function renderDatasets(datasets) {
     card.setAttribute('data-type', dataset.type.toLowerCase());
     card.setAttribute('data-name', dataset.name.toLowerCase());
     card.setAttribute('data-crop', dataset.crop.toLowerCase());
+
+    const cardKey = dataset.filePath || dataset.name;
+    const applyState = (collapsed) => {
+      card.classList.toggle('collapsed', collapsed);
+      const expanded = !collapsed;
+      toggleBtn.setAttribute('aria-expanded', expanded.toString());
+      toggleBtn.textContent = expanded ? '접기' : '펼치기';
+      toggleBtn.setAttribute('aria-label', expanded ? '세부 정보 접기' : '세부 정보 펼치기');
+    };
+
+    applyState(!expandedKeys.has(cardKey));
+
+    const handleToggle = () => {
+      const nextCollapsed = !card.classList.contains('collapsed');
+      applyState(nextCollapsed);
+      if (nextCollapsed) {
+        expandedKeys.delete(cardKey);
+      } else {
+        expandedKeys.add(cardKey);
+      }
+    };
+
+    toggleBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      handleToggle();
+    });
+
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('.toggle-btn')) return;
+      handleToggle();
+    });
 
     fragment.appendChild(clone);
   });
